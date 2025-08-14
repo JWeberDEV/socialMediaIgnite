@@ -1,5 +1,6 @@
 import styles from "./Post.module.css";
 import avatar from "../../assets/images/avatar.jpg";
+import Comment from"../comment/Comment.jsx"
 
 export default function Post() {
   return (
@@ -41,6 +42,9 @@ export default function Post() {
           <button type="submit">Publicar</button>
         </footer>
       </form>
+      <div className={styles.commentList}>
+        <Comment/>
+      </div>
     </article>
   );
 }
