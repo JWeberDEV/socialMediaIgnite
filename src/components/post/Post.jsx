@@ -1,13 +1,14 @@
 import styles from "./Post.module.css";
-import avatar from "../../assets/images/avatar.jpg";
-import Comment from"../comment/Comment.jsx"
+import Comment from "../comment/Comment.jsx";
+import user from "../../assets/images/avatar.jpg";
+import Avatar from "../avatar/avatar";
 
 export default function Post() {
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <img className={styles.avatar} src={avatar} alt="Avatar" />
+          <Avatar src={user} />
           <div className={styles.authorInfo}>
             <strong>Josias Weber</strong>
             <span>Web Developer</span>
@@ -43,7 +44,7 @@ export default function Post() {
         </footer>
       </form>
       <div className={styles.commentList}>
-        <Comment/>
+        <Comment />
       </div>
     </article>
   );

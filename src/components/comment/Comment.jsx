@@ -1,13 +1,13 @@
 import styles from "./Comment.module.css";
-import avatar from "../../assets/images/avatar.jpg";
+import user from "../../assets/images/avatar.jpg";
+import Avatar from "../avatar/avatar";
 import { BiTrash } from "react-icons/bi";
 import { FaThumbsUp } from "react-icons/fa";
 
 export default function Comment() {
   return (
     <div className={styles.comment}>
-      <img src={avatar} alt="avatar" />
-
+      <Avatar src={user} hasBorder={false}/>
       <div className={styles.commentBox}>
         <div className={styles.commentContent}>
           <header>
