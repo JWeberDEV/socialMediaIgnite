@@ -4,7 +4,8 @@ import Avatar from "../avatar/avatar";
 import { BiTrash } from "react-icons/bi";
 import { FaThumbsUp } from "react-icons/fa";
 
-export default function Comment() {
+export default function Comment(props) {
+  const { content } = props;
   return (
     <div className={styles.comment}>
       <Avatar src={user} hasBorder={false}/>
@@ -24,7 +25,7 @@ export default function Comment() {
               <BiTrash size={24} />
             </button>
           </header>
-          <p>Muito bom Devon, parabéns!! 👏👏</p>
+          <p>{content}</p>
         </div>
         <footer>
           <button>
