@@ -5,7 +5,12 @@ import { BiTrash } from "react-icons/bi";
 import { FaThumbsUp } from "react-icons/fa";
 
 export default function Comment(props) {
-  const { content } = props;
+  const { content, onDeleteComment } = props;
+
+  const handleDeleteComment = () => {
+    onDeleteComment(content);
+  }
+
   return (
     <div className={styles.comment}>
       <Avatar src={user} hasBorder={false}/>
@@ -21,7 +26,7 @@ export default function Comment(props) {
                 Cerca de 1h atrás
               </time>
             </div>
-            <button title="Deletar comentário">
+            <button onClick={handleDeleteComment} title="Deletar comentário">
               <BiTrash size={24} />
             </button>
           </header>

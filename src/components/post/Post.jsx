@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 
 export default function Post(props) {
   const { author, publishedAt, content } = props;
+  const [comments, setComments] = useState([]);
+  const [newCommentText, setNewCommentText] = useState("");
+
   const publishedDateFormatted = format(
     publishedAt,
     "d 'de' LLLL 'ás' HH:mm'h'",
@@ -18,17 +21,17 @@ export default function Post(props) {
     addSuffix: true,
   });
 
-  const [comments, setComments] = useState(["Post Top!"]);
-
   const handleCreateNewComment = (e) => {
     e.preventDefault();
+    setComments([...comments, newCommentText]);
+    setNewCommentText("");
+  };
 
-    let newCommenText = e.target.comment.value;
-    console.log(newCommenText);
-
-    setComments([...comments, newCommenText]);
-
-    newCommenText = '';
+  const deleteComment = (arg) => {
+    const commentsWithoutDeletedOne = comments.filter(comment => {
+      return comment !== arg
+    })
+    setComments(commentsWithoutDeletedOne);
   };
 
   return (
@@ -51,16 +54,16 @@ export default function Post(props) {
       <div className={styles.content}>
         {content.map((line) => {
           if (line.type === "paragraph") {
-            return <p>{line.content}</p>;
+            return <p key={line.content}>{line.content}</p>;
           } else if (line.type === "link") {
             return (
-              <p>
+              <p key={line.content}>
                 <a href="#">{line.content}</a>
               </p>
             );
           } else {
             return (
-              <a href="#" style={{ marginRight: "0.75rem" }}>
+              <a key={line.content} href="#" style={{ marginRight: "0.75rem" }}>
                 {line.content}
               </a>
             );
@@ -70,7 +73,12 @@ export default function Post(props) {
 
       <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
-        <textarea name="comment" placeholder="Deixe um comentário" />
+        <textarea
+          name="comment"
+          placeholder="Deixe um comentário"
+          value={newCommentText}
+          onChange={(e) => setNewCommentText(e.target.value)}
+        />
         <footer>
           <button type="submit">Publicar</button>
         </footer>
@@ -78,7 +86,13 @@ export default function Post(props) {
 
       <div className={styles.commentList}>
         {comments.map((comment) => {
-          return <Comment content={comment} />;
+          return (
+            <Comment
+              key={comment}
+              content={comment}
+              onDeleteComment={deleteComment}
+            />
+          );
         })}
       </div>
     </article>
