@@ -21,9 +21,10 @@ export default function Post(props) {
     addSuffix: true,
   });
 
-  const handleCreateNewComment = (e) => {
-    e.preventDefault();
+  const handleCreateNewComment = (arg) => {
+    arg.preventDefault();
     setComments([...comments, newCommentText]);
+    arg.target.setCustomValidity('');
     setNewCommentText("");
   };
 
@@ -33,6 +34,10 @@ export default function Post(props) {
     })
     setComments(commentsWithoutDeletedOne);
   };
+
+  const handleNewCommentInvalid = (arg) => {
+    arg.setCustomValidity('O campo é obrigatório')
+  }
 
   return (
     <article className={styles.post} key={props.id}>
@@ -78,6 +83,8 @@ export default function Post(props) {
           placeholder="Deixe um comentário"
           value={newCommentText}
           onChange={(e) => setNewCommentText(e.target.value)}
+          onInvalid={(e) => handleNewCommentInvalid (e.target)}
+          required
         />
         <footer>
           <button type="submit">Publicar</button>
