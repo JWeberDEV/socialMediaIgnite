@@ -24,8 +24,8 @@ export default function Post(props) {
   const handleCreateNewComment = (arg) => {
     arg.preventDefault();
     setComments([...comments, newCommentText]);
-    arg.target.setCustomValidity('');
     setNewCommentText("");
+    arg.target.setCustomValidity('');
   };
 
   const deleteComment = (arg) => {

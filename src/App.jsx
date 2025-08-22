@@ -18,12 +18,12 @@ const posts = [
       {
         type: "paragraph",
         content:
-          "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no n8n, evento da Rocketseat. O nome do projeto é LoopRobot 🚀",
+          "Um novo fluxo criado utilizando automação do n8n para atendimento automático no whatsapp. Dessa vez utilizando a Api meta Confira no link! 🚀",
       },
       { type: "link", content: "👉 weber.template/n8n" },
-      { type: "hashtag", content: "#novoprojeto" },
-      { type: "hashtag", content: "#nlw" },
-      { type: "hashtag", content: "#rocketseat" },
+      { type: "hashtag", content: "#novofluxo" },
+      { type: "hashtag", content: "#automação" },
+      { type: "hashtag", content: "#loopware" },
     ],
     publishedAt: new Date("2025-08-13 15:43:17"),
   },
