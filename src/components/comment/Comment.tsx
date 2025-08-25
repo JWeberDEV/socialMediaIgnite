@@ -5,7 +5,12 @@ import { BiTrash } from "react-icons/bi";
 import { FaThumbsUp } from "react-icons/fa";
 import { useState } from "react";
 
-export default function Comment(props) {
+interface CommentProps {
+  content: string;
+  onDeleteComment: (arg: string) => void;
+}
+
+export default function Comment(props: CommentProps) {
   const { content, onDeleteComment } = props;
 
   const [likeCount, setLikeCount] = useState(0);

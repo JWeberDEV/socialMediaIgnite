@@ -1,7 +1,7 @@
 import "./css/global.css";
-import Header from "./components/header/Header.js";
-import Post from "./components/post/Post.js";
-import Sidebar from "./components/sidebar/Sidebar.js";
+import Header from "./components/header/Header";
+import Post from "./components/post/Post";
+import Sidebar from "./components/sidebar/Sidebar";
 import styles from "./App.module.css";
 
 const posts = [
@@ -55,6 +55,7 @@ function App() {
         <Sidebar />
         <main>
           {posts.map((post) => {
+            console.log(post.content);
             return (
               <Post
                 key={post.id}

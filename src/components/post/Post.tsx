@@ -1,14 +1,31 @@
 import styles from "./Post.module.css";
-import Comment from "../comment/Comment.js";
-import Avatar from "../avatar/Avatar.js";
-import ptBR from "date-fns/locale/pt-BR";
+import Comment from "../comment/Comment";
+import Avatar from "../avatar/Avatar";
+import { ptBR } from "date-fns/locale/pt-BR";
 import { format, formatDistanceToNow } from "date-fns";
-import { useEffect, useState } from "react";
+import { useState, type FormEvent } from "react";
 
-export default function Post(props) {
+interface Author {
+  name: string;
+  role: string;
+  avatarUrl: string;
+}
+
+interface Content {
+  type: string;
+  content: string;
+}
+
+interface PostProps {
+  author: Author;
+  publishedAt: Date;
+  content: Content[];
+}
+
+export default function Post(props: PostProps) {
   const { author, publishedAt, content } = props;
-  const [comments, setComments] = useState([]);
-  const [newCommentText, setNewCommentText] = useState("");
+  const [comments, setComments] = useState<string[]>([]);
+  const [newCommentText, setNewCommentText] = useState('');
 
   const publishedDateFormatted = format(
     publishedAt,
@@ -21,28 +38,28 @@ export default function Post(props) {
     addSuffix: true,
   });
 
-  const handleCreateNewComment = (arg) => {
+  const handleCreateNewComment = (arg: FormEvent) => {
     arg.preventDefault();
     setComments([...comments, newCommentText]);
     setNewCommentText("");
   };
 
-  const deleteComment = (arg) => {
+  const handleNewCommentInvalid = (e: React.InvalidEvent<HTMLTextAreaElement>) => {
+    e.currentTarget.setCustomValidity("O campo é obrigatório");
+    e.currentTarget.setCustomValidity("");
+  };
+
+  const deleteComment = (arg: string) => {
     const commentsWithoutDeletedOne = comments.filter((comment) => {
       return comment !== arg;
     });
     setComments(commentsWithoutDeletedOne);
   };
 
-  const handleNewCommentInvalid = (arg) => {
-    arg.setCustomValidity("O campo é obrigatório");
-    arg.setCustomValidity("");
-  };
-
   const isNewCommentEmpty = newCommentText.length === 0;
 
   return (
-    <article className={styles.post} key={props.id}>
+    <article className={styles.post}>
       <header>
         <div className={styles.author}>
           <Avatar src={author.avatarUrl} />
@@ -59,7 +76,7 @@ export default function Post(props) {
         </time>
       </header>
       <div className={styles.content}>
-        {content.map((line) => {
+        {content.map(line => {
           if (line.type === "paragraph") {
             return <p key={line.content}>{line.content}</p>;
           } else if (line.type === "link") {
@@ -85,7 +102,7 @@ export default function Post(props) {
           placeholder="Deixe um comentário"
           value={newCommentText}
           onChange={(e) => setNewCommentText(e.target.value)}
-          onInvalid={(e) => handleNewCommentInvalid(e.target)}
+          onInvalid={handleNewCommentInvalid}
           required
         />
         <footer>
