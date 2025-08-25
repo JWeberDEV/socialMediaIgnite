@@ -1,19 +1,28 @@
 import styles from "./Comment.module.css";
 import user from "../../assets/images/avatar.jpg";
-import Avatar from "../avatar/avatar";
+import Avatar from "../avatar/Avatar";
 import { BiTrash } from "react-icons/bi";
 import { FaThumbsUp } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Comment(props) {
   const { content, onDeleteComment } = props;
 
+  const [likeCount, setLikeCount] = useState(0);
+
   const handleDeleteComment = () => {
     onDeleteComment(content);
-  }
+  };
+
+  const handleLikeComment = () => {
+    setLikeCount((state) => {
+      return state + 1;
+    });
+  };
 
   return (
     <div className={styles.comment}>
-      <Avatar src={user} hasBorder={false}/>
+      <Avatar src={user} hasBorder={false} />
       <div className={styles.commentBox}>
         <div className={styles.commentContent}>
           <header>
@@ -33,8 +42,8 @@ export default function Comment(props) {
           <p>{content}</p>
         </div>
         <footer>
-          <button>
-            <FaThumbsUp /> Aplaudir <span>20</span>
+          <button onClick={handleLikeComment}>
+            <FaThumbsUp /> Aplaudir <span>{likeCount}</span>
           </button>
         </footer>
       </div>

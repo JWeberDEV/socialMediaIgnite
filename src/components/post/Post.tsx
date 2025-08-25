@@ -1,6 +1,6 @@
 import styles from "./Post.module.css";
-import Comment from "../comment/Comment.jsx";
-import Avatar from "../avatar/avatar";
+import Comment from "../comment/Comment.js";
+import Avatar from "../avatar/Avatar.js";
 import ptBR from "date-fns/locale/pt-BR";
 import { format, formatDistanceToNow } from "date-fns";
 import { useEffect, useState } from "react";
@@ -25,19 +25,21 @@ export default function Post(props) {
     arg.preventDefault();
     setComments([...comments, newCommentText]);
     setNewCommentText("");
-    arg.target.setCustomValidity('');
   };
 
   const deleteComment = (arg) => {
-    const commentsWithoutDeletedOne = comments.filter(comment => {
-      return comment !== arg
-    })
+    const commentsWithoutDeletedOne = comments.filter((comment) => {
+      return comment !== arg;
+    });
     setComments(commentsWithoutDeletedOne);
   };
 
   const handleNewCommentInvalid = (arg) => {
-    arg.setCustomValidity('O campo é obrigatório')
-  }
+    arg.setCustomValidity("O campo é obrigatório");
+    arg.setCustomValidity("");
+  };
+
+  const isNewCommentEmpty = newCommentText.length === 0;
 
   return (
     <article className={styles.post} key={props.id}>
@@ -83,11 +85,13 @@ export default function Post(props) {
           placeholder="Deixe um comentário"
           value={newCommentText}
           onChange={(e) => setNewCommentText(e.target.value)}
-          onInvalid={(e) => handleNewCommentInvalid (e.target)}
+          onInvalid={(e) => handleNewCommentInvalid(e.target)}
           required
         />
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={isNewCommentEmpty}>
+            Publicar
+          </button>
         </footer>
       </form>
 

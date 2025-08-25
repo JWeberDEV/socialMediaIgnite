@@ -1,7 +1,7 @@
 import styles from "./Sidebar.module.css";
 import wallpaper from "../../assets/images/wallpaper.jpg";
 import user from "../../assets/images/avatar.jpg";
-import Avatar from "../avatar/avatar";
+import Avatar from "../avatar/Avatar";
 import { LuPencilLine } from "react-icons/lu";
 
 export default function Sidebar() {
@@ -9,7 +9,7 @@ export default function Sidebar() {
     <aside className={styles.sidebar}>
       <img className={styles.cover} src={wallpaper} />
       <div className={styles.profile}>
-        <Avatar src={user} hasBorder/>
+        <Avatar src={user} hasBorder />
         <strong>Josias Weber</strong>
         <span>Web Developer</span>
       </div>

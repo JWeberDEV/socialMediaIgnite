@@ -1,15 +1,14 @@
 import "./css/global.css";
-import Header from "./components/header/Header.jsx";
-import Post from "./components/post/Post.jsx";
-import Sidebar from "./components/sidebar/Sidebar.jsx";
+import Header from "./components/header/Header.js";
+import Post from "./components/post/Post.js";
+import Sidebar from "./components/sidebar/Sidebar.js";
 import styles from "./App.module.css";
 
 const posts = [
   {
     id: 1,
     author: {
-      avatarUrl:
-        "https://avatars.githubusercontent.com/u/89999437?v=4",
+      avatarUrl: "https://avatars.githubusercontent.com/u/89999437?v=4",
       name: "Josias Weber",
       role: "CEO @ Loopware",
     },
@@ -30,8 +29,7 @@ const posts = [
   {
     id: 2,
     author: {
-      avatarUrl:
-        "https://avatars.githubusercontent.com/u/85715765?v=4",
+      avatarUrl: "https://avatars.githubusercontent.com/u/85715765?v=4",
       name: "Filipe Brochier",
       role: "Developer @ Loopware",
     },
